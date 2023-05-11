@@ -56,12 +56,13 @@ class Agent:
     def get_bet(self, stake: float, lot: float) -> Bet:
         return Bet(user_id=self.agent_id, stake=stake, lot=lot)
 
+    def get_cost(self):
+        return uniform(50, 100)
+
     async def loop(self):
-        # TODO
-        # доделать запрос в result auction по id и получать то сколько нам удалось купить, а потом подключать дизель
         name_k = 0
         while True:
-            cost = uniform(50, 100)
+            cost = self.get_cost()
             name = f"{self.name}{name_k}"
             # name = f"images/example_agent_{name_k}"
             self.generation(name)

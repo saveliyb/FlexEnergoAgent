@@ -66,7 +66,6 @@ class generator:
         else:
             self.y_disel.pop()
             self.y_disel.append(y_disel)
-        self.generate_disel()
         if name:
             self.show(name)
         return y_disel
@@ -80,6 +79,7 @@ class generator:
         else:
             self.deals.pop()
             self.deals.append(deal)
+        self.generate_disel()
         self.show(name)
         return deal
 
@@ -91,7 +91,7 @@ class generator:
 
     def show(self, name: str):
         x = [i for i in range(len(self.y_sun))]
-        y_result = [sum((self.y_wind[i], self.y_sun[i], self.deals[i], -self.y_cons[i]))
+        y_result = [sum((self.y_wind[i], self.y_sun[i], self.deals[i], self.y_disel[i], -self.y_cons[i]))
                     for i in range(len(self.y_sun))]
         plt.plot(x, self.y_cons, '-r', alpha=0.7, label="потребление", lw=2)
         plt.plot(x, self.y_disel, '-g', alpha=0.7, label="дизель", lw=3)
